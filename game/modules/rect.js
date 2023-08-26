@@ -25,25 +25,63 @@ class Rect{
         }
     }
     collisionRight(listElem, rect){
-      for (let elem of listElem){
-		let rectElem = this.getRect(elem.ELEMENT);
-			// Здесь одна проблема
-		if (rect.bottom >= rectElem.top && rect.top > rectElem.bottom){
-			// Здесь две проблемы
-			if (rect.left >= rectElem.right && rect.right < rectElem.left){
-                this.MOVE_RIGHT = true
-                break
-			}
-			else{
-                this.MOVE_RIGHT = false
-			}
-		}
-		else{
-			this.MOVE_RIGHT = false
-		}
-	}
-	return this.MOVE_RIGHT
+        let collision = false;
+        for (let elem of listElem){
+		    let rectElem = this.getRect(elem.ELEMENT);
+		    if (rect.bottom > rectElem.top && rect.top < rectElem.bottom){
+                if (rect.left <= rectElem.left && rect.right >= rectElem.left){
+                    collision = true;
+                    break
+                }
+                else{
+                    collision = false;
+                }
+            }
+		    else{
+                collision = false;
+		    }
+	    }
+	    return collision
+    };
+    collisionLeft(listElem, rect){
+        let collision = false;
+            for (let elem of listElem){
+                let rectElem = this.getRect(elem.ELEMENT);
+                if (rect.bottom > rectElem.top && rect.top < rectElem.bottom){
+                        if (rect.right >= rectElem.right && rect.left <= rectElem.right){
+                            collision = true;
+                            break
+                        }
+                        else{
+                            collision = false;
+                        }
+                    }
+                else{
+                        collision = false;
+                }
+            }
+        return collision
     }
+    collisionBottom(listElem, rect){
+      let collision = false;
+        for (let elem of listElem){
+            let rectElem = this.getRect(elem.ELEMENT);
+            if (rect.right > rectElem.left && rect.left < rectElem.right){
+
+                if (rect.bottom >= rectElem.top && rect.top < rectElem.top){
+                    collision = true;
+                    break
+                }
+                else{
+                    collision = false;
+                }
+                }
+            else{
+                collision = false;
+            }
+        }
+      return collision
+  }
 }
 // Єкспортуємо объект "Rect"
 export default Rect

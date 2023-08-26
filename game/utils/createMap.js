@@ -6,7 +6,7 @@ function createMap(listMap){
     let x = 0;
     let y = 0;
     let hero;
-
+    let listStar = [];
     for (let row of listMap){
       for (let cell of row){
         if (cell == "1"){
@@ -29,12 +29,17 @@ function createMap(listMap){
               "img"
             );
         }
+        else if (cell == "s"){
+          let star = new Sprite(x, y, 100, 100, "images/star.png", undefined, "img");
+          listStar.push(star);
+        
+        }
         x += 100;
       };
       y += 100;
       x = 0;
     };
-  return [listElem, hero]
+  return [listElem, hero, listStar]
 }
 
 export default createMap
